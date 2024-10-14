@@ -38,6 +38,8 @@
         .button-group {
             display: flex;
             justify-content: space-around;
+            gap: 15px;
+            flex-wrap: wrap; /* Ensures buttons don't overlap on smaller screens */
         }
 
         button {
@@ -47,6 +49,7 @@
             border: none;
             border-radius: 10px;
             transition: all 0.3s ease;
+            min-width: 120px; /* Ensures buttons have enough width */
         }
 
         #yes {
@@ -63,6 +66,7 @@
             font-size: 100px;
             display: none;
         }
+
         /* Falling stars */
         .star {
             position: absolute;
@@ -90,6 +94,16 @@
             100% { transform: translate(calc(100vw - 50px), calc(100vh - 50px)); }
         }
 
+        @media (max-width: 600px) {
+            .button-group {
+                flex-direction: column; /* Stack the buttons vertically on small screens */
+            }
+
+            button {
+                margin-bottom: 15px; /* Add space between buttons */
+            }
+        }
+
         @media (hover: none) {
             button {
                 position: absolute;
@@ -114,7 +128,6 @@
         const yesButton = document.getElementById('yes');
         const hugEmoji = document.getElementById('hug-emoji');
         const message = document.querySelector('.message');
-
 
         // Function to move "No" button on hover (Desktop)
         noButton.addEventListener('mouseover', () => {
@@ -144,8 +157,7 @@
             button.style.top = `${y}px`;
         }
 
-        // Show hug emoji on "Yes" click
-         // Show hug emoji, change message, and hide "No" button on "Yes" click
+        // Show hug emoji, change message, and hide "No" button on "Yes" click
         yesButton.addEventListener('click', () => {
             hugEmoji.style.display = 'block';
             message.textContent = "We will make the best match! 💖";
